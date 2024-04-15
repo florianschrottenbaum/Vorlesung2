@@ -32,3 +32,5 @@ def get_picture(current_user):
         return image
     except:
         return {}
+    
+print(find_person_data_by_name("Yunus Schmirander"))
