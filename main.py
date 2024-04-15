@@ -1,8 +1,9 @@
 import streamlit as st
 import read_data
+from PIL import Image
 
 data = read_data.get_person_data()
-print(read_data.get_person_list(data))
+personlist = (read_data.get_person_list(data))
 
 st.write("# EKG APP")
 st.write("## Versuchsperson auswählen")
@@ -14,6 +15,11 @@ if 'current_user' not in st.session_state:
 # Dieses Mal speichern wir die Auswahl als Session State
 st.session_state.current_user = st.selectbox(
     'Versuchsperson',
-    options = ["Nutzer1", "Nutzer2"], key="sbVersuchsperson")
+    options = personlist, key="sbVersuchsperson")
 
 st.write("Der Name ist: ", st.session_state.current_user)
+
+# Laden eines Bilds
+image = Image.open("data/pictures/js.jpg")
+# Anzeigen eines Bilds mit Caption
+st.image(image, caption=st.session_state.current_user)
