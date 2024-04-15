@@ -13,16 +13,22 @@ def get_person_list(person_data):
     return personlist
 
 def find_person_data_by_name(current_user):
-    names = current_user.split(" ")
-    firstname = names[0]
-    lastname= names[1]
-    person_data = get_person_data()
-    for element in person_data:
-        if element["firstname"] == firstname and element["lastname"] == lastname:
-            return element
+    try:
+        names = current_user.split(" ")
+        firstname = names[0]
+        lastname= names[1]
+        person_data = get_person_data()
+        for element in person_data:
+            if element["firstname"] == firstname and element["lastname"] == lastname:
+                return element
+    except:
+        return {}
         
 def get_picture(current_user):
-    current_user_infos = find_person_data_by_name(current_user)
-    current_user_picture_path = current_user_infos['picture_path']
-    image = Image.open(current_user_picture_path)
-    return image
+    try:
+        current_user_infos = find_person_data_by_name(current_user)
+        current_user_picture_path = current_user_infos['picture_path']
+        image = Image.open(current_user_picture_path)
+        return image
+    except:
+        return {}
