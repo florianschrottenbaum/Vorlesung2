@@ -1,5 +1,7 @@
 import streamlit as st
 import read_data
+from datetime import datetime
+import pytz
 
 def callback_function():
     # Logging Message
@@ -11,7 +13,7 @@ data = read_data.get_person_data()
 personlist = (read_data.get_person_list(data))
 
 st.write("# EKG APP")
-st.write("## Versuchsperson auswählen")
+st.write("## Choose subject")
 
 # Session State wird leer angelegt, solange er noch nicht existiert
 if 'current_user' not in st.session_state:
@@ -26,9 +28,11 @@ col1, col2 = st.columns(2)
 with col1:
    # Dieses Mal speichern wir die Auswahl als Session State
     st.session_state.current_user = st.selectbox(
-    'Versuchsperson',
+    'Subject',
     options = personlist, key="sbVersuchsperson",on_change = callback_function)
-    st.write("Geburtsjahr: ", read_data.find_person_data_by_name(st.session_state.current_user)['date_of_birth'])
+    st.write("Year of Birth: ", str(read_data.find_person_data_by_name(st.session_state.current_user)['date_of_birth']))
+    st.write("The user has changed to:", (st.session_state.current_user), "at:", (str(datetime.now(pytz.timezone('Europe/Berlin'))))[:19])
+
 
 with col2:
     image = read_data.get_picture(st.session_state.current_user)
