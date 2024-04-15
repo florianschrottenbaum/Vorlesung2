@@ -18,6 +18,6 @@ st.session_state.current_user = st.selectbox(
 
 st.write("Der Name ist: ", st.session_state.current_user)
 
-image = read_data.find_person_data_by_name(st.session_state.current_user)
+image = read_data.get_picture(st.session_state.current_user)
 # Anzeigen eines Bilds mit Caption
 st.image(image, caption=st.session_state.current_user)
