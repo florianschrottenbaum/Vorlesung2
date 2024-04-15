@@ -1,4 +1,8 @@
 import streamlit as st
+import read_data
+
+data = read_data.get_person_data()
+print(read_data.get_person_list(data))
 
 st.write("# EKG APP")
 st.write("## Versuchsperson auswählen")
